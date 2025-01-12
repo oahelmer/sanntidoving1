@@ -1,0 +1,1 @@
+The code creates two threads that both edits the same variable. Since the adding operation takes varying time in the cpu the answer varys based on wich thread gets the faster and slower operation. Since they both edit the same value we get a varying results.
