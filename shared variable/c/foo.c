@@ -6,13 +6,16 @@
 
 int i = 0;
 const int count = 1000000;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 // Note the return type: void*
 void* incrementingThreadFunction(){
     // TODO: increment i 1_000_000 times
     for (size_t j = 0; j < count; j++)
     {
+        pthread_mutex_lock(&mutex);
         i += 1;
+        pthread_mutex_unlock(&mutex);
     }
     
     return NULL;
@@ -22,7 +25,9 @@ void* decrementingThreadFunction(){
     // TODO: decrement i 1_000_000 times
     for (size_t j = 0; j < count; j++)
     {
+        pthread_mutex_lock(&mutex);
         i -= 1;
+        pthread_mutex_unlock(&mutex);
     }
     
     return NULL;
@@ -44,6 +49,8 @@ int main(){
     // Hint: Use `pthread_join`    
     pthread_join(incrementingThreadFunction_thread, NULL);
     pthread_join(decrementingThreadFunction_thread, NULL);
+
+    pthread_mutex_destroy(&mutex);
     
     printf("The magic number is: %d\n", i);
     return 0;

@@ -1,1 +1,3 @@
 The code creates two threads that both edits the same variable. Since the adding operation takes varying time in the cpu the answer varys based on wich thread gets the faster and slower operation. Since they both edit the same value we get a varying results.
+
+mutex is used because it can be used to give exclusive access to a resource "i" in this case. This means we get to choose that only one thread at a time gets to edit the i variable.
